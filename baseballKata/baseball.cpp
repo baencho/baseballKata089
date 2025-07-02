@@ -20,9 +20,16 @@ public:
 			return { true, 3, 0 };
 		}
 
-		if (guessNumber == "128") return { false, 2, 0 };
+		for (int i = 0; i < 3; i++) {
+			if (guessNumber[i] == question[i]) result.strikes++;
+			for (int j = i + 1; j < 3; j++) {
+				if (guessNumber[i] == question[j]) {
+					result.balls++;
+				}
+			}
+		}
 
-		return { false, 0, 0 };
+		return result;
 	}
 
 	void assertIllegalArgument(const std::string& guessNumber)
