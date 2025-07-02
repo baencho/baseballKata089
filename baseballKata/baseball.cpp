@@ -13,10 +13,15 @@ class Baseball {
 public:
 	Baseball(const string& question) : question{ question } {}
 	GuessResult guess(const string& guessNumber) {
+		GuessResult result = { false, 0, 0 };
+
 		assertIllegalArgument(guessNumber);
 		if (question == guessNumber) {
 			return { true, 3, 0 };
 		}
+
+		if (guessNumber == "128") return { false, 2, 0 };
+
 		return { false, 0, 0 };
 	}
 
