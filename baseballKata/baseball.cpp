@@ -21,10 +21,10 @@ public:
 		}
 
 		for (int i = 0; i < 3; i++) {
-			if (guessNumber[i] == question[i]) result.strikes++;
-			for (int j = i + 1; j < 3; j++) {
+			for (int j = 0; j < 3; j++) {
 				if (guessNumber[i] == question[j]) {
-					result.balls++;
+					if (i == j) result.strikes++;
+					else result.balls++;
 				}
 			}
 		}
