@@ -16,25 +16,22 @@ public:
 		GuessResult result = { false, 0, 0 };
 
 		assertIllegalArgument(guessNumber);
-		if (question == guessNumber) {
-			return { true, 3, 0 };
-		}
 
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				if (guessNumber[i] == question[j]) {
-					if (i == j) result.strikes++;
+		for (int guessIndex = 0; guessIndex < QUESTION_LENGTH; guessIndex++) {
+			for (int questionIndex = 0; questionIndex < QUESTION_LENGTH; questionIndex++) {
+				if (guessNumber[guessIndex] == question[questionIndex]) {
+					if (guessIndex == questionIndex) result.strikes++;
 					else result.balls++;
 				}
 			}
 		}
-
+		if (result.strikes == QUESTION_LENGTH) result.solved = true;
 		return result;
 	}
 
 	void assertIllegalArgument(const std::string& guessNumber)
 	{
-		if (guessNumber.length() != 3) {
+		if (guessNumber.length() != QUESTION_LENGTH) {
 			throw std::length_error("Must be three letters");
 		}
 		for (char ch : guessNumber) {
@@ -52,5 +49,6 @@ public:
 			(guessNumber[0] == guessNumber[2]));
 	}
 private:
+	const int QUESTION_LENGTH = 3;
 	string question;
 };
